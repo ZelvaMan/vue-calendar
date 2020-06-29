@@ -6,12 +6,10 @@
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
 import vcalendar from "./components/VCalendar";
 export default {
   name: "App",
   components: {
-    HelloWorld,
     vcalendar
   }
 };

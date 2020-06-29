@@ -4,7 +4,7 @@
       <div class="col-sm-6">
         <div class="form-group">
           <div class="input-group date" ref="dateTimePicker" :id="id" data-target-input="nearest">
-            <cleave
+            <Cleave
               type="text"
               class="form-control datetimepicker-input"
               :data-target="id"
@@ -48,6 +48,11 @@ export default {
      */
     daysOfWeekDisabled: Array
   },
+  data() {
+    return {
+      id: "id"
+    };
+  },
   mounted() {
     $(this.$refs.dateTimePicker).datetimepicker({
       format: this.format,
@@ -57,8 +62,8 @@ export default {
   },
   computed: {
     cleaveOpinion() {
-      if (format == "L") return Option.date;
-      if (format == "LT") return Option.time;
+      if (this.format == "L") return Option.date;
+      if (this.format == "LT") return Option.time;
       return null;
     }
   }
