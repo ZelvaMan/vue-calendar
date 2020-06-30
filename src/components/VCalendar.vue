@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-sm-6">
         <div class="form-group">
-          <!-- <div class="input-group date" ref="dateTimePicker" :id="id" data-target-input="nearest"> 
+          <div class="input-group date" ref="dateTimePicker" :id="id" data-target-input="nearest">
             <cleave
               type="text"
               class="form-control datetimepicker-input"
@@ -16,8 +16,8 @@
                 <i class="fa fa-calendar"></i>
               </div>
             </div>
-          </div>-->
-          <div class="input-group date" id="datetimepicker2" data-target-input="nearest">
+          </div>
+          <!-- <div class="input-group date" id="datetimepicker2" data-target-input="nearest">
             <input
               type="text"
               class="form-control datetimepicker-input"
@@ -32,7 +32,7 @@
                 <i class="fa fa-calendar"></i>
               </div>
             </div>
-          </div>
+          </div>-->
         </div>
       </div>
     </div>
@@ -74,14 +74,14 @@ export default {
     };
   },
   mounted() {
-    // $(this.$refs.dateTimePicker).datetimepicker({
-    //   format: this.format,
-    //   disabledDates: this.disabledDates,
-    //   daysOfWeekDisabled: this.daysOfWeekDisabled
-    // });
-    $("#datetimepicker2").datetimepicker({
-      locale: "ru"
+    $(this.$refs.dateTimePicker).datetimepicker({
+      format: this.format,
+      disabledDates: this.disabledDates,
+      daysOfWeekDisabled: this.daysOfWeekDisabled
     });
+    // $("#datetimepicker2").datetimepicker({
+    //   locale: "ru"
+    // });
   },
   computed: {
     cleaveOpinion() {
