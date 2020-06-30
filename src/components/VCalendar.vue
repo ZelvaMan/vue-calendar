@@ -4,11 +4,12 @@
       <div class="col-sm-6">
         <div class="form-group">
           <div class="input-group date" ref="dateTimePicker" :id="id" data-target-input="nearest">
-            <Cleave
+            <cleave
               type="text"
               class="form-control datetimepicker-input"
               :data-target="id"
               :options="cleaveOpinion"
+              v-model="date"
             />
             <div class="input-group-append" :data-target="id" data-toggle="datetimepicker">
               <div class="input-group-text">
@@ -25,6 +26,8 @@
 <script>
 import Cleave from "vue-cleave-component";
 import $ from "jquery";
+import Vue from "vue";
+Vue.use(Cleave);
 export default {
   name: "vcalendar",
   component: {
@@ -50,7 +53,8 @@ export default {
   },
   data() {
     return {
-      id: "id"
+      id: "id",
+      date: ""
     };
   },
   mounted() {
@@ -64,11 +68,8 @@ export default {
     cleaveOpinion() {
       if (this.format == "L") return Option.date;
       if (this.format == "LT") return Option.time;
-      return null;
+      return Option.date;
     }
   }
 };
 </script>
-
-<style>
-</style>
