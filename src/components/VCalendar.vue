@@ -3,15 +3,31 @@
     <div class="row">
       <div class="col-sm-6">
         <div class="form-group">
-          <div class="input-group date" ref="dateTimePicker" :id="id" data-target-input="nearest">
+          <!-- <div class="input-group date" ref="dateTimePicker" :id="id" data-target-input="nearest"> 
             <cleave
               type="text"
               class="form-control datetimepicker-input"
               :data-target="id"
               :options="cleaveOpinion"
-              v-model="date"
+              :value="date"
             />
             <div class="input-group-append" :data-target="id" data-toggle="datetimepicker">
+              <div class="input-group-text">
+                <i class="fa fa-calendar"></i>
+              </div>
+            </div>
+          </div>-->
+          <div class="input-group date" id="datetimepicker2" data-target-input="nearest">
+            <input
+              type="text"
+              class="form-control datetimepicker-input"
+              data-target="#datetimepicker2"
+            />
+            <div
+              class="input-group-append"
+              data-target="#datetimepicker2"
+              data-toggle="datetimepicker"
+            >
               <div class="input-group-text">
                 <i class="fa fa-calendar"></i>
               </div>
@@ -58,10 +74,13 @@ export default {
     };
   },
   mounted() {
-    $(this.$refs.dateTimePicker).datetimepicker({
-      format: this.format,
-      disabledDates: this.disabledDates,
-      daysOfWeekDisabled: this.daysOfWeekDisabled
+    // $(this.$refs.dateTimePicker).datetimepicker({
+    //   format: this.format,
+    //   disabledDates: this.disabledDates,
+    //   daysOfWeekDisabled: this.daysOfWeekDisabled
+    // });
+    $("#datetimepicker2").datetimepicker({
+      locale: "ru"
     });
   },
   computed: {

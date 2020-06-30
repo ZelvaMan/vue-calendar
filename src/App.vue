@@ -7,6 +7,7 @@
 
 <script>
 import vcalendar from "./components/VCalendar";
+
 export default {
   name: "App",
   components: {
