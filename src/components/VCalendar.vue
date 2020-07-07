@@ -1,38 +1,33 @@
 <template>
   <div class="container">
     <div class="row">
+      
       <div class="col-sm-6">
         <div class="form-group">
-          <div class="input-group date" ref="dateTimePicker" :id="id" data-target-input="nearest">
-            <cleave
+
+            <div class="input-group date" ref="dtpicker" :id="id" data-target-input="nearest"> 
+            <!-- <input
               type="text"
               class="form-control datetimepicker-input"
-              :data-target="id"
+              data-target="#dtpicker"
+            /> -->
+             <cleave
+              type="text"
+              class="form-control datetimepicker-input"
+              :data-target="idWHastag"
               :options="cleaveOpinion"
-              :value="date"
-            />
-            <div class="input-group-append" :data-target="id" data-toggle="datetimepicker">
-              <div class="input-group-text">
-                <i class="fa fa-calendar"></i>
-              </div>
-            </div>
-          </div>
-          <!-- <div class="input-group date" id="datetimepicker2" data-target-input="nearest">
-            <input
-              type="text"
-              class="form-control datetimepicker-input"
-              data-target="#datetimepicker2"
+              v-model="date"
             />
             <div
               class="input-group-append"
-              data-target="#datetimepicker2"
+              :data-target="idWHastag"
               data-toggle="datetimepicker"
             >
               <div class="input-group-text">
                 <i class="fa fa-calendar"></i>
               </div>
             </div>
-          </div>-->
+          </div> 
         </div>
       </div>
     </div>
@@ -43,7 +38,9 @@
 import Cleave from "vue-cleave-component";
 import $ from "jquery";
 import Vue from "vue";
+//import VueMoment from 'vue-moment';
 Vue.use(Cleave);
+Vue.use(require('vue-moment'));
 export default {
   name: "vcalendar",
   component: {
@@ -62,33 +59,46 @@ export default {
     disabledDates: Array,
 
     /**
-     * @type {Array}
-     * @description array from numbers from 0-6
+     * @type {Boolean}
+     * @description true : weekends disabled
      */
-    daysOfWeekDisabled: Array
+    disabledweekends: Boolean,
+    /**
+     * @type {String}
+     * @description index of vcalendar
+     */
+    id: String
   },
   data() {
     return {
-      id: "id",
-      date: ""
+      date: "",
     };
   },
   mounted() {
-    $(this.$refs.dateTimePicker).datetimepicker({
-      format: this.format,
+    console.log("mounted")
+
+    $(this.$refs.dtpicker).datetimepicker({
+      locale: "en",
+            format: this.format,
       disabledDates: this.disabledDates,
-      daysOfWeekDisabled: this.daysOfWeekDisabled
+      daysOfWeekDisabled: this.disabledweekend
     });
-    // $("#datetimepicker2").datetimepicker({
-    //   locale: "ru"
-    // });
   },
   computed: {
     cleaveOpinion() {
       if (this.format == "L") return Option.date;
       if (this.format == "LT") return Option.time;
       return Option.date;
+    },
+    disabledweekend () {
+      if (this.disabledweekends)
+      return [0, 6]
+      return []
+    },
+    idWHastag () {
+      return "#" + this.id
     }
+    
   }
 };
 </script>
