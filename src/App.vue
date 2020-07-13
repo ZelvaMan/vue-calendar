@@ -1,40 +1,50 @@
 <template>
   <div id="app">
-    <h1> VCalendar </h1>
-    <label>date and time  </label>
-    <span>{{ vcaldate }}</span>
-    <vcalendar id="vcal" v-model="vcaldate"></vcalendar>
-    <label>time only</label>
-    <vcalendar format="LT"  id="vcal2"></vcalendar>
-    <label>date only  with disabled weekends</label>
-    <vcalendar format="L" :disabledweekends="true" id="vcal3"></vcalendar>
+    <div class="card m-3 border-dark" title="VCalendar">
+      <div class="card-header">VCalendar</div>
+
+      <div class="card-body">
+        <label>
+          date and time default locale
+          <b>CS</b>
+        </label>
+        <vcalendar id="vcal"></vcalendar>
+        <label>time only</label>
+        <vcalendar format="LT" id="vcal2"></vcalendar>
+        <label>
+          date only with disabled weekends locale
+          <b>DE</b>
+        </label>
+        <vcalendar format="L" :disabledDaysOfWeek="[0,1]" id="vcal3" locale="de"></vcalendar>
+      </div>
+    </div>
+    <div class="card border-dark m-3">
+      <div class="card-header">VDateRangePicker</div>
+      <div class="card-body">
+        <label>Simple Date Range Picker</label>
+        <VDateRangePicker></VDateRangePicker>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import Vue from 'vue'
+import Vue from "vue";
 import vcalendar from "./components/VCalendar";
-Vue.use(require('vue-moment'));
+import VDateRangePicker from "./components/VDateRangePicker";
+Vue.use(require("vue-moment"));
 export default {
   name: "App",
   components: {
-    vcalendar
+    vcalendar,
+    VDateRangePicker
   },
-  data (){
-    return{
+  data() {
+    return {
       vcaldate: ""
-    }
+    };
   }
 };
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+

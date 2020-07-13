@@ -1,33 +1,23 @@
 <template>
   <div class="container">
     <div class="row">
-      
       <div class="col-sm-6">
         <div class="form-group">
-
-            <div class="input-group date" ref="dtpicker" :id="id" data-target-input="nearest"> 
-            <!-- <input
-              type="text"
-              class="form-control datetimepicker-input"
-              data-target="#dtpicker"
-            /> -->
-             <cleave
+          <div class="input-group date" ref="dtpicker" :id="id" data-target-input="nearest">
+            <input type="text" class="form-control datetimepicker-input" :data-target="idWHastag" />
+            <!-- <cleave
               type="text"
               class="form-control datetimepicker-input"
               :data-target="idWHastag"
               :options="cleaveOpinion"
               v-model="date"
-            />
-            <div
-              class="input-group-append"
-              :data-target="idWHastag"
-              data-toggle="datetimepicker"
-            >
+            />-->
+            <div class="input-group-append" :data-target="idWHastag" data-toggle="datetimepicker">
               <div class="input-group-text">
                 <i class="fa fa-calendar"></i>
               </div>
             </div>
-          </div> 
+          </div>
         </div>
       </div>
     </div>
@@ -40,7 +30,7 @@ import $ from "jquery";
 import Vue from "vue";
 //import VueMoment from 'vue-moment';
 Vue.use(Cleave);
-Vue.use(require('vue-moment'));
+Vue.use(require("vue-moment"));
 export default {
   name: "vcalendar",
   component: {
@@ -59,10 +49,18 @@ export default {
     disabledDates: Array,
 
     /**
-     * @type {Boolean}
-     * @description true : weekends disabled
+     * @type {Array}
+     * @description array 0-6
      */
-    disabledweekends: Boolean,
+    disabledDaysOfWeek: Array,
+    /**
+     * @type {String}
+     * @description See momentjs for valid locales.
+     */
+    locale: {
+      type: String,
+      default: "cs"
+    },
     /**
      * @type {String}
      * @description index of vcalendar
@@ -71,17 +69,17 @@ export default {
   },
   data() {
     return {
-      date: "",
+      date: ""
     };
   },
   mounted() {
-    console.log("mounted")
+    console.log("mounted");
 
     $(this.$refs.dtpicker).datetimepicker({
-      locale: "en",
-            format: this.format,
+      locale: this.locale,
+      format: this.format,
       disabledDates: this.disabledDates,
-      daysOfWeekDisabled: this.disabledweekend
+      daysOfWeekDisabled: this.disabledDaysOfWeek
     });
   },
   computed: {
@@ -90,15 +88,9 @@ export default {
       if (this.format == "LT") return Option.time;
       return Option.date;
     },
-    disabledweekend () {
-      if (this.disabledweekends)
-      return [0, 6]
-      return []
-    },
-    idWHastag () {
-      return "#" + this.id
+    idWHastag() {
+      return "#" + this.id;
     }
-    
   }
 };
 </script>
