@@ -1,6 +1,6 @@
 <template>
-  <div class="container">
-    <div class="input-group mb-3">
+  <div class="container mw-100 m-100">
+    <div class="input-group w-100 mb-3">
       <div class="input-group-prepend">
         <div class="input-group-text">
           <i v-if="withTime" class="fa fa-clock-o"></i>
@@ -13,7 +13,7 @@
         class="form-control"
         ref="drpicker"
         value="01/01/2018 - 01/15/2018"
-        v-model="daterange"
+        v-model="value"
       />
     </div>
   </div>
@@ -32,12 +32,15 @@ export default {
     withTime: {
       type: Boolean,
       default: false
-    }
+    },
+    /**
+     * @type String
+     * @description daterange
+     */
+    value: String
   },
   data() {
-    return {
-      daterange: ""
-    };
+    return {};
   },
   mounted() {
     $(this.$refs.drpicker).daterangepicker({

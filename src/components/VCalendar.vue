@@ -1,10 +1,15 @@
 <template>
-  <div class="container">
+  <div class="container mw-100 w-100">
     <div class="row">
-      <div class="col-sm-6">
-        <div class="form-group">
+      <div class="col-sm-6 w-100 mw-100 d-flex" style="flex-basis: 100%">
+        <div class="form-group w-100">
           <div class="input-group date" ref="dtpicker" :id="id" data-target-input="nearest">
-            <input type="text" class="form-control datetimepicker-input" :data-target="idWHastag" />
+            <input
+              type="text"
+              class="form-control datetimepicker-input"
+              :data-target="idWHastag"
+              v-model="value"
+            />
             <!-- <cleave
               type="text"
               class="form-control datetimepicker-input"
@@ -65,12 +70,15 @@ export default {
      * @type {String}
      * @description index of vcalendar
      */
-    id: String
+    id: String,
+    /**
+     * @type {String}
+     * @description selected date
+     */
+    value: String
   },
   data() {
-    return {
-      date: ""
-    };
+    return {};
   },
   mounted() {
     console.log("mounted");

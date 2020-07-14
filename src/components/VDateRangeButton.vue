@@ -1,17 +1,17 @@
 <template>
-  <div class="container">
-    <div
-      id="reportrange"
-      class="input-group"
-      style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%"
-    >
+  <div class="container mw-100 m-100">
+    <div ref="reportrange" class="input-group w-100">
       <div class="input-group-prepend">
         <div class="input-group-text">
           <i class="fa fa-calendar"></i>
         </div>
       </div>
-      <span ref="renderspam"></span>
-      <i class="fa fa-caret-down"></i>
+      <input v-model="value" type="text" class="form-control" ref="render" :id="id" />
+      <div class="input-group-append">
+        <div class="input-group-text">
+          <i class="fa fa-caret-down"></i>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -27,25 +27,33 @@ export default {
   name: "VDateRangeButton",
   component: {},
   props: {
-    id: String
+    /**
+     * @type String
+     * @description id of input
+     */
+    id: String,
+    /**
+     * @type String
+     * @description Date range
+     */
+    value: String
   },
   data() {
-    return {
-      daterange: ""
-    };
+    return {};
   },
   mounted() {
-    $(function() {
+    $(() => {
+      //last 30 days is default
       var start = moment().subtract(29, "days");
       var end = moment();
 
-      function cb(start, end) {
-        $("#reportrange span").html(
-          start.format("MMMM D, YYYY") + " - " + end.format("MMMM D, YYYY")
-        );
-      }
+      //rendering to input
+      var cb = (start, end) => {
+        this.value =
+          start.format("MMMM D, YYYY") + " - " + end.format("MMMM D, YYYY");
+      };
 
-      $("#reportrange").daterangepicker(
+      $(this.$refs.reportrange).daterangepicker(
         {
           startDate: start,
           endDate: end,
@@ -70,7 +78,7 @@ export default {
         },
         cb
       );
-
+      //render to input
       cb(start, end);
     });
   },
