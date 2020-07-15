@@ -10,13 +10,8 @@
         <div class="card-header">VCalendar</div>
 
         <div class="card-body">
-          <label>
-            date and time default locale
-            <b>CS</b>
-            --
-            {{vcaldate}}
-          </label>
-          <vcalendar id="vcal" :value="vcaldate"></vcalendar>
+          <label>date and time default locale -- {{VCAlDate}}</label>
+          <vcalendar id="vcal" :value="VCAlDate"></vcalendar>
           <label>time only</label>
           <vcalendar format="LT" id="vcal2"></vcalendar>
           <label>
@@ -29,8 +24,10 @@
       <div class="card border-dark m-3">
         <div class="card-header">VDateRangePicker adn VDateRangeButton (uses same library)</div>
         <div class="card-body">
-          <label>Simple Date Range Picker -- {{VDRPvalue}}</label>
-          <VDateRangePicker id="VDTP1" :value="VDRPvalue"></VDateRangePicker>
+          <label>forman</label>
+          <input v-model.lazy="format_DateRangePicker" class="form-control mr-3 ml-3" />
+          <label>Simple Date Range Picker --</label>
+          <VDateRangePicker id="VDTP1" :format="format_DateRangePicker"></VDateRangePicker>
           <label>With Time</label>
           <VDateRangePicker id="VDTP2" :withTime="true"></VDateRangePicker>
           <label>Date range button</label>
@@ -48,8 +45,8 @@
           <VDateRangePicker id="admitLteVDateRangePicker" />
           <label>Date and Time range:</label>
           <VDateRangePicker :withTime="true" />
-          <label>Date range button: -- {{VDRB}}</label>
-          <VDateRangeButton id="admitLteVDateRangeButton" :value="VDRB"></VDateRangeButton>
+          <label>Date range button: --</label>
+          <VDateRangeButton id="admitLteVDateRangeButton"></VDateRangeButton>
         </div>
       </div>
     </div>
@@ -73,9 +70,9 @@ export default {
   },
   data() {
     return {
-      vcaldate: "d",
-      VDRPvalue: "d",
-      VDRB: "d"
+      format_DateRangePicker: "",
+      VCAlDate: "",
+      VDateRangePickerDate: ""
     };
   }
 };

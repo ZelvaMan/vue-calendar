@@ -10,13 +10,6 @@
               :data-target="idWHastag"
               v-model="value"
             />
-            <!-- <cleave
-              type="text"
-              class="form-control datetimepicker-input"
-              :data-target="idWHastag"
-              :options="cleaveOpinion"
-              v-model="date"
-            />-->
             <div class="input-group-append" :data-target="idWHastag" data-toggle="datetimepicker">
               <div class="input-group-text">
                 <i class="fa fa-calendar"></i>
@@ -77,25 +70,38 @@ export default {
      */
     value: String
   },
+  watch: {
+    format: function() {
+      // watch it
+      console.log("VCAL format changed to:" + this.format);
+      this.$forceUpdate();
+    },
+    value: function() {
+      console.log("VCAL Value changed");
+    }
+  },
   data() {
     return {};
   },
   mounted() {
-    console.log("mounted");
-
-    $(this.$refs.dtpicker).datetimepicker({
-      locale: this.locale,
-      format: this.format,
-      disabledDates: this.disabledDates,
-      daysOfWeekDisabled: this.disabledDaysOfWeek
-    });
+    console.log("VCAl" + this.id + " mounted");
+    this.datetimepicker();
+  },
+  updated() {
+    console.log("VCAl" + this.id + " updated");
+    this.datetimepicker();
+  },
+  methods: {
+    datetimepicker: function() {
+      $(this.$refs.dtpicker).datetimepicker({
+        locale: this.locale,
+        format: this.format,
+        disabledDates: this.disabledDates,
+        daysOfWeekDisabled: this.disabledDaysOfWeek
+      });
+    }
   },
   computed: {
-    cleaveOpinion() {
-      if (this.format == "L") return Option.date;
-      if (this.format == "LT") return Option.time;
-      return Option.date;
-    },
     idWHastag() {
       return "#" + this.id;
     }

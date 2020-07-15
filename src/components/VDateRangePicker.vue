@@ -37,25 +37,44 @@ export default {
      * @type String
      * @description daterange
      */
-    value: String
+    value: String,
+    format: {
+      type: String
+    }
+  },
+  watch: {
+    format: function() {
+      // watch it
+      console.log("VDateRange format changed to:" + this.format);
+      this.$forceUpdate();
+    }
   },
   data() {
     return {};
   },
   mounted() {
-    $(this.$refs.drpicker).daterangepicker({
-      locale: this.locale
-    });
+    this.daterangepicker();
+  },
+  updated() {
+    this.daterangepicker();
+  },
+  methods: {
+    daterangepicker: function() {
+      $(this.$refs.drpicker).daterangepicker({
+        timePicker: true,
+        locale: this.locale
+      });
+    }
   },
   computed: {
     locale() {
       if (this.WithTime) {
         return {
-          format: "YYYY M/DD hh:mm A"
+          format: "YYYY M/DD hh:mm"
         };
       } else {
         return {
-          format: "YYYY M/DD"
+          format: this.format
         };
       }
     }
