@@ -9,6 +9,9 @@
               class="form-control datetimepicker-input"
               :data-target="idWHastag"
               v-model="value"
+              v-on:change="signalChange"
+              v-on:input="signalChange"
+              ref="input"
             />
             <div class="input-group-append" :data-target="idWHastag" data-toggle="datetimepicker">
               <div class="input-group-text">
@@ -73,23 +76,24 @@ export default {
   watch: {
     format: function() {
       // watch it
-      console.log("VCAL format changed to:" + this.format);
       this.$forceUpdate();
     },
-    value: function() {
-      console.log("VCAL Value changed");
-    }
+    value: function() {}
   },
   data() {
     return {};
   },
   mounted() {
-    console.log("VCAl" + this.id + " mounted");
     this.datetimepicker();
+    document.addEventListener(
+      "change.datetimepicker",
+      this.signalChange(),
+      false
+    );
   },
   updated() {
-    console.log("VCAl" + this.id + " updated");
     this.datetimepicker();
+    this.$emit("change", this.value);
   },
   methods: {
     datetimepicker: function() {
@@ -97,8 +101,14 @@ export default {
         locale: this.locale,
         format: this.format,
         disabledDates: this.disabledDates,
-        daysOfWeekDisabled: this.disabledDaysOfWeek
+        daysOfWeekDisabled: this.disabledDaysOfWeek,
+        change: this.signalChange()
       });
+      $(this.$refs.dtpicker).on("change.datetimepicker", this.signalChange);
+    },
+
+    signalChange: function() {
+      this.$emit("input", this.value);
     }
   },
   computed: {

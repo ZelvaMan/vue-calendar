@@ -49,7 +49,7 @@ export default {
 
       //rendering to input
       var cb = (start, end) => {
-        this.value =
+        this.$refs.render =
           start.format("MMMM D, YYYY") + " - " + end.format("MMMM D, YYYY");
       };
 

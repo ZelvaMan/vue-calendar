@@ -11,9 +11,10 @@
         type="text"
         :id="id"
         class="form-control"
-        ref="drpicker"
-        value="01/01/2018 - 01/15/2018"
-        v-model="value"
+        ref="input"
+        :value="value"
+        v-on:change="signalChange"
+        v-on:input="signalChange"
       />
     </div>
   </div>
@@ -39,7 +40,8 @@ export default {
      */
     value: String,
     format: {
-      type: String
+      type: String,
+      default: "MMMM Do YYYY, h:mm:ss a'"
     }
   },
   watch: {
@@ -60,10 +62,15 @@ export default {
   },
   methods: {
     daterangepicker: function() {
-      $(this.$refs.drpicker).daterangepicker({
+      $(this.$refs.input).daterangepicker({
         timePicker: true,
         locale: this.locale
       });
+      $(this.$refs.input).on("apply.daterangepicker", this.signalChange);
+    },
+    signalChange: function() {
+      this.$emit("input", this.$refs.input.value);
+      console.log("VDRP input event fired with data:" + this.$refs.input.value);
     }
   },
   computed: {
@@ -73,9 +80,15 @@ export default {
           format: "YYYY M/DD hh:mm"
         };
       } else {
-        return {
-          format: this.format
-        };
+        if (this.format.lenght > 0) {
+          return {
+            format: this.format
+          };
+        } else {
+          return {
+            format: "MMMM Do YYYY, h:mm '"
+          };
+        }
       }
     }
   }

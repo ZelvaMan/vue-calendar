@@ -11,7 +11,7 @@
 
         <div class="card-body">
           <label>date and time default locale -- {{VCAlDate}}</label>
-          <vcalendar id="vcal" :value="VCAlDate"></vcalendar>
+          <vcalendar id="vcal" v-on:input="VCalChanged" :value="VCAlDate"></vcalendar>
           <label>time only</label>
           <vcalendar format="LT" id="vcal2"></vcalendar>
           <label>
@@ -26,8 +26,8 @@
         <div class="card-body">
           <label>forman</label>
           <input v-model.lazy="format_DateRangePicker" class="form-control mr-3 ml-3" />
-          <label>Simple Date Range Picker --</label>
-          <VDateRangePicker id="VDTP1" :format="format_DateRangePicker"></VDateRangePicker>
+          <label>Simple Date Range Picker -- {{VDateRangePickerDate}}</label>
+          <VDateRangePicker id="VDTP1" :format="format_DateRangePicker" v-on:input="VDRPChanged"></VDateRangePicker>
           <label>With Time</label>
           <VDateRangePicker id="VDTP2" :withTime="true"></VDateRangePicker>
           <label>Date range button</label>
@@ -50,6 +50,14 @@
         </div>
       </div>
     </div>
+    <div class="row">
+      <div class="card m-3 border-dark">
+        <div class="card-header bg-primary">example</div>
+        <div class="card-body">
+          <example />
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 <!-- 
@@ -60,13 +68,15 @@ import Vue from "vue";
 import vcalendar from "./components/VCalendar";
 import VDateRangePicker from "./components/VDateRangePicker";
 import VDateRangeButton from "./components/VDateRangeButton";
+import example from "./components/Example";
 Vue.use(require("vue-moment"));
 export default {
   name: "App",
   components: {
     vcalendar,
     VDateRangePicker,
-    VDateRangeButton
+    VDateRangeButton,
+    example
   },
   data() {
     return {
@@ -74,6 +84,16 @@ export default {
       VCAlDate: "",
       VDateRangePickerDate: ""
     };
+  },
+
+  methods: {
+    VCalChanged: function(value) {
+      this.VCAlDate = value;
+    },
+    VDRPChanged: function(value) {
+      console.log("VDateRangePickerDate changed from app");
+      this.VDateRangePickerDate = value;
+    }
   }
 };
 </script>
