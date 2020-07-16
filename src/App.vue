@@ -50,12 +50,10 @@
         </div>
       </div>
     </div>
-    <div class="row">
-      <div class="card m-3 border-dark">
-        <div class="card-header bg-primary">example</div>
-        <div class="card-body">
-          <example />
-        </div>
+    <div class="card m-3 border-dark w-100">
+      <div class="card-header bg-primary">example</div>
+      <div class="card-body">
+        <example />
       </div>
     </div>
   </div>
