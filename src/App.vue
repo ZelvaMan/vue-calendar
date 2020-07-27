@@ -86,7 +86,6 @@ export default {
 
   methods: {
     VCalChanged(value) {
-      console.log("vcal value chnaged");
       this.VCAlDate = value;
     },
     VDRPChanged(value) {
