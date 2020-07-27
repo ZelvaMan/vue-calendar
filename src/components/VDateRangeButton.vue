@@ -18,11 +18,8 @@
 
 <script>
 import $ from "jquery";
-import Vue from "vue";
-//import VueMoment from "vue-moment";
-//Vue.use(require("vue-moment"));
+
 import moment from "moment";
-Vue.use(moment);
 export default {
   name: "VDateRangeButton",
   component: {},
@@ -47,12 +44,6 @@ export default {
       var start = moment().subtract(29, "days");
       var end = moment();
 
-      //rendering to input
-      var cb = (start, end) => {
-        this.$refs.render =
-          start.format("MMMM D, YYYY") + " - " + end.format("MMMM D, YYYY");
-      };
-
       $(this.$refs.reportrange).daterangepicker(
         {
           startDate: start,
@@ -76,24 +67,12 @@ export default {
             ]
           }
         },
-        cb
+        (start, end) => {
+          this.$refs.render.value =
+            start.format("MMMM D, YYYY") + " - " + end.format("MMMM D, YYYY");
+        }
       );
-      //render to input
-      cb(start, end);
     });
-  },
-  computed: {
-    locale() {
-      if (this.WithTime) {
-        return {
-          format: "YYYY M/DD hh:mm A"
-        };
-      } else {
-        return {
-          format: "YYYY M/DD"
-        };
-      }
-    }
   }
 };
 </script>
