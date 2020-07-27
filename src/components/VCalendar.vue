@@ -33,7 +33,7 @@ import Vue from "vue";
 Vue.use(Cleave);
 Vue.use(require("vue-moment"));
 export default {
-  name: "vcalendar",
+  name: "VCalendar",
   component: {
     Cleave
   },
@@ -80,9 +80,7 @@ export default {
     },
     value: function() {}
   },
-  data() {
-    return {};
-  },
+
   mounted() {
     this.datetimepicker();
   },
