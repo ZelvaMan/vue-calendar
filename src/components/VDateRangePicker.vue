@@ -47,7 +47,6 @@ export default {
   watch: {
     format: function() {
       // watch it
-      console.log("VDateRange format changed to:" + this.format);
       this.$forceUpdate();
     }
   },
@@ -70,7 +69,6 @@ export default {
     },
     signalChange: function() {
       this.$emit("input", this.$refs.input.value);
-      console.log("VDRP input event fired with data:" + this.$refs.input.value);
     }
   },
   computed: {
