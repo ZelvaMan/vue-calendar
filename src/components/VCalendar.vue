@@ -29,9 +29,7 @@
 import Cleave from "vue-cleave-component";
 import $ from "jquery";
 import Vue from "vue";
-//import VueMoment from 'vue-moment';
 Vue.use(Cleave);
-Vue.use(require("vue-moment"));
 export default {
   name: "VCalendar",
   component: {
