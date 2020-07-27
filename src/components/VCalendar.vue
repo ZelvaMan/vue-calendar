@@ -85,11 +85,6 @@ export default {
   },
   mounted() {
     this.datetimepicker();
-    document.addEventListener(
-      "change.datetimepicker",
-      this.signalChange(),
-      false
-    );
   },
   updated() {
     this.datetimepicker();
@@ -101,13 +96,12 @@ export default {
         locale: this.locale,
         format: this.format,
         disabledDates: this.disabledDates,
-        daysOfWeekDisabled: this.disabledDaysOfWeek,
-        change: this.signalChange()
+        daysOfWeekDisabled: this.disabledDaysOfWeek
       });
       $(this.$refs.dtpicker).on("change.datetimepicker", this.signalChange);
     },
 
-    signalChange: function() {
+    signalChange() {
       this.$emit("input", this.value);
     }
   },

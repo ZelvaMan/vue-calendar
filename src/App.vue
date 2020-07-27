@@ -11,14 +11,14 @@
 
         <div class="card-body">
           <label>date and time default locale -- {{VCAlDate}}</label>
-          <vcalendar id="vcal" v-on:input="VCalChanged" :value="VCAlDate"></vcalendar>
+          <VCalendar id="vcal" v-on:input="VCalChanged" :value="VCAlDate"></VCalendar>
           <label>time only</label>
-          <vcalendar format="LT" id="vcal2"></vcalendar>
+          <VCalendar format="LT" id="vcal2"></VCalendar>
           <label>
             date only with disabled weekends locale
             <b>DE</b>
           </label>
-          <vcalendar format="L" :disabledDaysOfWeek="[0,1]" id="vcal3" locale="de"></vcalendar>
+          <VCalendar format="L" :disabledDaysOfWeek="[0,1]" id="vcal3" locale="de"></VCalendar>
         </div>
       </div>
       <div class="card border-dark m-3">
@@ -40,7 +40,7 @@
         <div class="card-header bg-primary">Sample for admin-lte</div>
         <div class="card-body">
           <label>Date:</label>
-          <vcalendar format="L" id="adminLteVCalendar"></vcalendar>
+          <VCalendar format="L" id="adminLteVCalendar"></VCalendar>
           <label>Date range:</label>
           <VDateRangePicker id="admitLteVDateRangePicker" />
           <label>Date and Time range:</label>
@@ -63,7 +63,7 @@ Fix VCalendar width problem
 -->
 <script>
 import Vue from "vue";
-import vcalendar from "./components/VCalendar";
+import VCalendar from "./components/VCalendar";
 import VDateRangePicker from "./components/VDateRangePicker";
 import VDateRangeButton from "./components/VDateRangeButton";
 import example from "./components/Example";
@@ -71,7 +71,7 @@ Vue.use(require("vue-moment"));
 export default {
   name: "App",
   components: {
-    vcalendar,
+    VCalendar,
     VDateRangePicker,
     VDateRangeButton,
     example
@@ -86,10 +86,10 @@ export default {
 
   methods: {
     VCalChanged: function(value) {
+      console.log("vcal value chnaged");
       this.VCAlDate = value;
     },
     VDRPChanged: function(value) {
-      console.log("VDateRangePickerDate changed from app");
       this.VDateRangePickerDate = value;
     }
   }
