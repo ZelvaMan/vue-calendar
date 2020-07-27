@@ -85,11 +85,11 @@ export default {
   },
 
   methods: {
-    VCalChanged: function(value) {
+    VCalChanged(value) {
       console.log("vcal value chnaged");
       this.VCAlDate = value;
     },
-    VDRPChanged: function(value) {
+    VDRPChanged(value) {
       this.VDateRangePickerDate = value;
     }
   }

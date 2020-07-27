@@ -74,11 +74,11 @@ export default {
     value: String
   },
   watch: {
-    format: function() {
+    format() {
       // watch it
       this.$forceUpdate();
     },
-    value: function() {}
+    value() {}
   },
 
   mounted() {
@@ -89,7 +89,7 @@ export default {
     this.$emit("change", this.value);
   },
   methods: {
-    datetimepicker: function() {
+    datetimepicker() {
       $(this.$refs.dtpicker).datetimepicker({
         locale: this.locale,
         format: this.format,

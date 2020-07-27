@@ -22,9 +22,7 @@
 
 <script>
 import $ from "jquery";
-import Vue from "vue";
-//import VueMoment from 'vue-moment';
-Vue.use(require("vue-moment"));
+
 export default {
   name: "VDateRangePicker",
   component: {},
@@ -45,7 +43,7 @@ export default {
     }
   },
   watch: {
-    format: function() {
+    format() {
       // watch it
       this.$forceUpdate();
     }
@@ -60,7 +58,7 @@ export default {
     this.daterangepicker();
   },
   methods: {
-    daterangepicker: function() {
+    daterangepicker() {
       $(this.$refs.input).daterangepicker({
         timePicker: true,
         locale: this.locale
